@@ -1,0 +1,25 @@
+{
+  "name": "mutual-back",
+  "version": "1.0.0",
+  "description": "\"# mutual-back\"",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon index.js",
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jcanocarballo/mutual-back.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jcanocarballo/mutual-back/issues"
+  },
+  "homepage": "https://github.com/jcanocarballo/mutual-back#readme",
+  "dependencies": {
+    "dotenv": "^9.0.1",
+    "express": "^4.17.1"
+  }
+}
