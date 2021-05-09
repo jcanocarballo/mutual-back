@@ -1,6 +1,9 @@
 const {response} = require('express');
 
-const login = (req, res = response ) => {
+const loginUsuario = (req, res = response ) => {
+
+  const { email, password } = req.body;
+  
   return res.json({
     ok: true,
     msg: 'login'
@@ -8,13 +11,17 @@ const login = (req, res = response ) => {
 }
 
 const crearUsuario = (req, res = response ) => {
-  return res.json({
+  
+  const { name, email, password } = req.body;
+
+  return res.status(201).json({
     ok: true,
     msg: 'register'
   });
 }
 
-const renew = (req, res = response ) => {
+const renewToken = (req, res = response ) => {
+  const { token } = req.body;
   return res.json({
     ok: true,
     msg: 'renew'
@@ -23,6 +30,6 @@ const renew = (req, res = response ) => {
 
 module.exports = {
   crearUsuario,
-  login,
-  renew
+  loginUsuario,
+  renewToken
 }

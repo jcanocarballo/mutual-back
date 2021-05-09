@@ -20,6 +20,7 @@
   "homepage": "https://github.com/jcanocarballo/mutual-back#readme",
   "dependencies": {
     "dotenv": "^9.0.1",
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "express-validator": "^6.11.1"
   }
 }
