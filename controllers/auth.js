@@ -1,23 +1,47 @@
 const {response} = require('express');
+const Usuario = require('../models/Usuario');
 
-const loginUsuario = (req, res = response ) => {
+const loginUsuario = async (req, res = response ) => {
 
   const { email, password } = req.body;
-  
-  return res.json({
+
+  return res.status(200).json({
     ok: true,
     msg: 'login'
   });
 }
 
-const crearUsuario = (req, res = response ) => {
+const crearUsuario = async (req, res = response ) => {
   
-  const { name, email, password } = req.body;
+  const { email, password } = req.body;
+  
+  try {    
+    let usuario = await Usuario.findOne({email});
 
-  return res.status(201).json({
-    ok: true,
-    msg: 'register'
-  });
+    if(usuario){
+      return res.status(400).json({
+        ok: false,
+        msg: "Un usuario existe con ese correo."
+      });
+    }
+    usuario = new Usuario(req.body);
+  
+    await usuario.save();
+  
+    return res.status(201).json({
+      ok: true,
+      msg: 'Usuario creado con exito.',
+      uid: usuario._id,
+      name: usuario.name,
+      email: usuario.email 
+    });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({
+      ok: false,
+      msg: 'Por favor hable con el administrador.'
+    })  
+  }
 }
 
 const renewToken = (req, res = response ) => {
