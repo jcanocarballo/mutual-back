@@ -6,10 +6,40 @@ const loginUsuario = async (req, res = response ) => {
 
   const { email, password } = req.body;
 
-  return res.status(200).json({
-    ok: true,
-    msg: 'login'
-  });
+  try {
+
+    const usuario = await Usuario.findOne({ email });
+
+    if ( !usuario ) {
+      return res.status(400).json({
+        ok: false,
+        msg: 'El usuario y/o contraseña no validos'
+      });
+    }
+
+    // Confirmar los passwords
+    const validPassword = bcrypt.compareSync( password, usuario.password );
+
+    if ( !validPassword ) {
+      return res.status(400).json({
+        ok: false,
+        msg: 'El usuario y/o contraseña no validos'
+      });
+    }
+
+    return res.status(200).json({
+      ok: true,
+      uid: usuario.id,
+      name: usuario.name,
+      email: usuario.email
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      ok: false,
+      msg: 'Por favor hable con el administrador'
+    });
+  }
 }
 
 const crearUsuario = async (req, res = response ) => {
