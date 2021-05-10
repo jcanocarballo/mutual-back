@@ -15,32 +15,31 @@ const router = Router();
 // Todas tienes que pasar por la validación del JWT
 router.use( validarJWT );
 
-
 // Obtener eventos 
 router.get('/', getEventos );
 
 // Crear un nuevo evento
 router.post(
-    '/',
-    [
-        check('title','El titulo es obligatorio').not().isEmpty(),
-        check('start','Fecha de inicio es obligatoria').custom( isDate ),
-        check('end','Fecha de finalización es obligatoria').custom( isDate ),
-        validarCampos
-    ],
-    crearEvento 
+  '/',
+  [
+    check('title','El titulo es obligatorio').not().isEmpty(),
+    check('start','Fecha de inicio es obligatoria').custom( isDate ),
+    check('end','Fecha de finalización es obligatoria').custom( isDate ),
+    validarCampos
+  ],
+  crearEvento 
 );
 
 // Actualizar Evento
 router.put(
-    '/:id', 
-    [
-        check('title','El titulo es obligatorio').not().isEmpty(),
-        check('start','Fecha de inicio es obligatoria').custom( isDate ),
-        check('end','Fecha de finalización es obligatoria').custom( isDate ),
-        validarCampos
-    ],
-    actualizarEvento 
+  '/:id', 
+  [
+    check('title','El titulo es obligatorio').not().isEmpty(),
+    check('start','Fecha de inicio es obligatoria').custom( isDate ),
+    check('end','Fecha de finalización es obligatoria').custom( isDate ),
+    validarCampos
+  ],
+  actualizarEvento 
 );
 
 // Borrar evento

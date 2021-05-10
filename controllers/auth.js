@@ -8,29 +8,29 @@ const loginUsuario = async (req, res = response ) => {
   const { email, password } = req.body;
 
   try {
-
     const usuario = await Usuario.findOne({ email });
-
+    
     if ( !usuario ) {
       return res.status(400).json({
         ok: false,
         msg: 'El usuario y/o contraseña no validos'
       });
     }
-
+  
     // Confirmar los passwords
+    
     const validPassword = bcrypt.compareSync( password, usuario.password );
-
+    
     // Generar JWT
     const token = await generarJWT( usuario.id, usuario.name, usuario.email );
-
+    
     if ( !validPassword ) {
       return res.status(400).json({
         ok: false,
         msg: 'El usuario y/o contraseña no validos'
       });
     }
-
+    
     return res.status(200).json({
       ok: true,
       uid: usuario.id,
@@ -45,6 +45,7 @@ const loginUsuario = async (req, res = response ) => {
       msg: 'Por favor hable con el administrador'
     });
   }
+
 }
 
 const crearUsuario = async (req, res = response ) => {
