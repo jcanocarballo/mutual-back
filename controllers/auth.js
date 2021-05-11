@@ -91,12 +91,14 @@ const crearUsuario = async (req, res = response ) => {
 
 const renewToken = async (req, res = response ) => {
   const { uid, name, email } = req;
-
   // Generar JWT
   const token = await generarJWT( uid, name, email );
   
   return res.json({
       ok: true,
+      uid, 
+      name, 
+      email,
       token
   })
 }
