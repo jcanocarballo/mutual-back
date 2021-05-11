@@ -19,6 +19,7 @@ app.use( express.static('public') );
 app.use(express.json());
 
 //Rutas
+app.use('/login', express.static('public'));
 //TODO: auth -> crear, login, renew
 app.use('/api/auth', require('./routes/auth'));
 //TODO: CRUD: -> Eventos
